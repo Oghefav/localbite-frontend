@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locabite/controller/signup_controller.dart';
 import 'package:locabite/routes.dart';
-import 'package:locabite/utility/app_colours.dart';
-import 'package:locabite/utility/big_text.dart';
-import 'package:locabite/utility/demensions.dart';
-import 'package:locabite/utility/small_text.dart';
+import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/core/utility/brown_big_text.dart';
+import 'package:locabite/core/utility/brown_small_text.dart';
+import 'package:locabite/core/utility/demensions.dart';
 
 class CustomerSigupPage extends StatelessWidget {
   const CustomerSigupPage({super.key});
@@ -46,12 +46,12 @@ class CustomerSigupPage extends StatelessWidget {
                       ),
                      
                       SizedBox(height: Demensions.height15),
-                      BigText(
+                      BrownBigText(
                         text: 'Create account',
                         size: Demensions.fontSize10 * 4,
                       ),
                       // SizedBox(height: Demensions.height15),
-                      BigText(text: 'Name'),
+                      BrownBigText(text: 'Name'),
 
                       // Name Field
                       Container(
@@ -77,7 +77,7 @@ class CustomerSigupPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Phone number'),
+                      BrownBigText(text: 'Phone number'),
                       // Controller Field
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
@@ -102,7 +102,7 @@ class CustomerSigupPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Email address'),
+                      BrownBigText(text: 'Email address'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -126,7 +126,7 @@ class CustomerSigupPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Password'),
+                      BrownBigText(text: 'Password'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -250,7 +250,7 @@ class CustomerSigupPage extends StatelessWidget {
                         ),
 
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Confirm password'),
+                      BrownBigText(text: 'Confirm password'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -331,7 +331,7 @@ class CustomerSigupPage extends StatelessWidget {
                               ),
                             ),
                             child: Center(
-                              child: BigText(
+                              child: BrownBigText(
                                 text: 'Sign up',
                                 color: AppColours.white,
                                 size: Demensions.fontSize10 * 2,
@@ -345,10 +345,10 @@ class CustomerSigupPage extends StatelessWidget {
                       Row(
                         children: [
                           SizedBox(width: Demensions.width15 * 3),
-                          SmallText(text: 'Already have an account?'),
+                          BrownSmallText(text: 'Already have an account?'),
                           GestureDetector(
                             onTap: () => Get.toNamed(AppRoute.getLoginPage()),
-                            child: BigText(text: 'Sign in')),
+                            child: BrownBigText(text: 'Sign in')),
                         ],
                       ),
                     ],

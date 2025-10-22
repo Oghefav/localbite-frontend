@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:locabite/routes/customer/Homepage/main_food_body_page.dart';
-import 'package:locabite/utility/app_colours.dart';
+import 'package:locabite/core/utility/app_colours.dart';
 import 'package:locabite/widgets/app_icon.dart';
-import 'package:locabite/utility/big_text.dart';
-import 'package:locabite/utility/demensions.dart';
-import 'package:locabite/utility/small_text.dart';
+import 'package:locabite/core/utility/big_text.dart';
+import 'package:locabite/core/utility/demensions.dart';
+import 'package:locabite/core/utility/small_text.dart';
 import 'package:locabite/widgets/comment_widget.dart';
 
 class MealDetail extends StatelessWidget {

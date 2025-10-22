@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:locabite/controller/splash_controller.dart';
+import 'package:locabite/core/utility/check_location.dart';
 import 'package:locabite/routes/chef/chef_main_page.dart';
-import 'package:locabite/utility/app_colours.dart';
+import 'package:locabite/core/utility/app_colours.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class ChefHomePage extends StatefulWidget {
@@ -26,7 +25,10 @@ class _ChefHomePageState extends State<ChefHomePage> {
 
   List<Widget> _buildScreens() {
     return [
-      ChefMainPage(), Container(child: Center(child: Text('ik;ljf;akj'),),), Container(child: Center(child: Text('ik;ljf;akj'),),),];
+      ChefMainPage(),
+      Container(child: Center(child: Text('ik;ljf;akj'))),
+      Container(child: Center(child: Text('ik;ljf;akj'))),
+    ];
   }
 
   @override
@@ -44,8 +46,8 @@ class _ChefHomePageState extends State<ChefHomePage> {
         inactiveColorPrimary: AppColours.lightBrown,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.add),
-        title: ("Add"),
+        icon: Icon(Icons.payment),
+        title: ("Transactions"),
         activeColorPrimary: AppColours.darkbrown,
         inactiveColorPrimary: AppColours.lightBrown,
       ),
@@ -60,7 +62,7 @@ class _ChefHomePageState extends State<ChefHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<SplashController>().checkLocation(context);
+    checkLocation(context);
     return PersistentTabView(
       context,
       controller: _controller,
@@ -73,7 +75,7 @@ class _ChefHomePageState extends State<ChefHomePage> {
       hideNavigationBarWhenKeyboardAppears: true,
       popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
       padding: const EdgeInsets.only(top: 8),
-      backgroundColor: AppColours.cream,
+      // backgroundColor: AppColours.cream,
       isVisible: true,
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(
@@ -91,7 +93,7 @@ class _ChefHomePageState extends State<ChefHomePage> {
       confineToSafeArea: true,
       navBarHeight: kBottomNavigationBarHeight,
       navBarStyle:
-          NavBarStyle.style17, // Choose the nav bar style with this property
+          NavBarStyle.style8, // Choose the nav bar style with this property
     );
   }
 }

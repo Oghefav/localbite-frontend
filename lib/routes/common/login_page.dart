@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locabite/controller/Login_controller.dart';
 import 'package:locabite/routes.dart';
-import 'package:locabite/utility/app_colours.dart';
-import 'package:locabite/utility/big_text.dart';
-import 'package:locabite/utility/demensions.dart';
-import 'package:locabite/utility/small_text.dart';
+import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/core/utility/demensions.dart';
+import 'package:locabite/core/utility/brown_big_text.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -43,9 +42,10 @@ class LoginPage extends StatelessWidget {
                         size: Demensions.iconSize20,
                       ),
                     ),
-                    SizedBox(height: Demensions.height15),
-                    BigText(text: 'Login', size: Demensions.fontSize10 * 4),
-                    BigText(text: 'Email'),
+                    
+                    Center(child: BrownBigText(text: 'Login', size: Demensions.fontSize10 * 4)),
+                    SizedBox(height: Demensions.height15 * 2),
+                    BrownBigText(text: 'Email'),
 
                     // Email Field
                     Container(
@@ -70,7 +70,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: Demensions.height15),
-                    BigText(text: 'Password'),
+                    BrownBigText(text: 'Password'),
                     Container(
                       padding: EdgeInsets.only(left: Demensions.width10),
                       decoration: BoxDecoration(
@@ -126,7 +126,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           child: Center(
-                            child: BigText(
+                            child: BrownBigText(
                               text: 'Sign in',
                               color: AppColours.white,
                               size: Demensions.fontSize10 * 2,
@@ -140,10 +140,10 @@ class LoginPage extends StatelessWidget {
                     Row(
                       children: [
                         SizedBox(width: Demensions.width15 * 3),
-                        SmallText(text: 'Don\'t have an account?'),
+                        BrownBigText(text: 'Don\'t have an account?'),
                         GestureDetector(
                           onTap: () => Get.toNamed(AppRoute.getRolePage()),
-                          child: BigText(text: 'Sign Up'),
+                          child: BrownBigText(text: 'Sign Up'),
                         ),
                       ],
                     ),

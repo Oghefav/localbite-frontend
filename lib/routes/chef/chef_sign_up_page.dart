@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locabite/controller/signup_controller.dart';
 import 'package:locabite/routes.dart';
-import 'package:locabite/utility/app_colours.dart';
-import 'package:locabite/utility/big_text.dart';
-import 'package:locabite/utility/demensions.dart';
-import 'package:locabite/utility/small_text.dart';
+import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/core/utility/brown_big_text.dart';
+import 'package:locabite/core/utility/demensions.dart';
+import 'package:locabite/core/utility/small_text.dart';
 
 class ChefSignUpPage extends StatelessWidget {
   const ChefSignUpPage({super.key});
@@ -44,12 +44,12 @@ class ChefSignUpPage extends StatelessWidget {
                         ),
                       ),
 
-                      BigText(
+                      BrownBigText(
                         text: 'Create account',
                         size: Demensions.fontSize10 * 4,
                       ),
                       // SizedBox(height: Demensions.height15),
-                      BigText(text: 'Name'),
+                      BrownBigText(text: 'Name'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -72,7 +72,7 @@ class ChefSignUpPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Phone number'),
+                      BrownBigText(text: 'Phone number'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -96,7 +96,7 @@ class ChefSignUpPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Email address'),
+                      BrownBigText(text: 'Email address'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -120,7 +120,7 @@ class ChefSignUpPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Brand name'),
+                      BrownBigText(text: 'Brand name'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -144,7 +144,7 @@ class ChefSignUpPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Password'),
+                      BrownBigText(text: 'Password'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -268,7 +268,7 @@ class ChefSignUpPage extends StatelessWidget {
                         ),
 
                       SizedBox(height: Demensions.height15),
-                      BigText(text: 'Confirm password'),
+                      BrownBigText(text: 'Confirm password'),
                       Container(
                         padding: EdgeInsets.only(left: Demensions.width10),
                         decoration: BoxDecoration(
@@ -350,7 +350,7 @@ class ChefSignUpPage extends StatelessWidget {
                               ),
                             ),
                             child: Center(
-                              child: BigText(
+                              child: BrownBigText(
                                 text: 'Sign up',
                                 color: AppColours.white,
                                 size: Demensions.fontSize10 * 2,
@@ -367,7 +367,7 @@ class ChefSignUpPage extends StatelessWidget {
                           SmallText(text: 'Already have an account?'),
                           GestureDetector(
                             onTap: () => Get.toNamed(AppRoute.getLoginPage()),
-                            child: BigText(text: 'Sign in')),
+                            child: BrownBigText(text: 'Sign in')),
                         ],
                       ),
                     ],

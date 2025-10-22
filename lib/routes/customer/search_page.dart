@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:locabite/utility/app_colours.dart';
-import 'package:locabite/utility/demensions.dart';
+import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/core/utility/demensions.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({super.key});

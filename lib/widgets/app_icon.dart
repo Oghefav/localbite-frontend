@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:locabite/utility/app_colours.dart';
+import 'package:locabite/core/utility/app_colours.dart';
 
 class AppIcon extends StatelessWidget {
   final IconData icon;

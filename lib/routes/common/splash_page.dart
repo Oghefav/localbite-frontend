@@ -4,20 +4,25 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:locabite/controller/splash_controller.dart';
+import 'package:locabite/core/utility/check_location.dart';
 import 'package:locabite/routes.dart';
-import 'package:locabite/utility/app_colours.dart';
-import 'package:locabite/utility/big_text.dart';
-import 'package:locabite/utility/demensions.dart';
-import 'package:locabite/utility/small_text.dart';
+import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/core/utility/big_text.dart';
+import 'package:locabite/core/utility/demensions.dart';
+import 'package:locabite/core/utility/brown_big_text.dart';
+import 'package:locabite/core/utility/brown_small_text.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
+
+  
+
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(
       builder: (controller) {
-        controller.checkLocation(context);
+        checkLocation(context);
         return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: AppColours.cream,
@@ -85,13 +90,13 @@ class SplashPage extends StatelessWidget {
                 right: 50,
                 child: Row(
                   children: [
-                    SmallText(
+                    BrownSmallText(
                       text: 'Don\'t have an account?',
                       color: AppColours.lightBrown,
                     ),
                     GestureDetector(
                       onTap: () => Get.toNamed(AppRoute.getRolePage()),
-                      child: BigText(text: 'Sign Up'),
+                      child: BrownBigText(text: 'Sign Up'),
                     ),
                   ],
                 ),

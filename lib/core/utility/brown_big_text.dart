@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:locabite/utility/app_colours.dart';
+import 'package:locabite/core/utility/app_colours.dart';
 
-class BigText extends StatelessWidget {
+class BrownBigText extends StatelessWidget {
   final String text;
   final Color color;
   final double size;
 
-  const BigText({
+  const BrownBigText({
     super.key,
-    this.size = 16,
+    this.size = 18,
     this.color = AppColours.darkbrown,
     required this.text,
   });
@@ -18,10 +18,10 @@ class BigText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
+        fontFamily: 'roboto',
         color: color,
-        fontFamily: "Roboto",
         fontSize: size,
-        fontWeight: FontWeight.bold
+        fontWeight: FontWeight.w500,
       ),
     );
   }

@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:locabite/utility/app_colours.dart';
-import 'package:locabite/utility/big_text.dart';
-import 'package:locabite/utility/demensions.dart';
-import 'package:locabite/utility/small_text.dart';
+import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/core/utility/big_text.dart';
+import 'package:locabite/core/utility/demensions.dart';
+import 'package:locabite/core/utility/small_text.dart';
 import 'package:intl/intl.dart';
 
 class MainFoodBody extends StatelessWidget {

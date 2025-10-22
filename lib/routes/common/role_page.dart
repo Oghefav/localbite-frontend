@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locabite/routes.dart';
-import 'package:locabite/utility/app_colours.dart';
-import 'package:locabite/utility/big_text.dart';
-import 'package:locabite/utility/demensions.dart';
+import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/core/utility/demensions.dart';
+import 'package:locabite/core/utility/brown_big_text.dart';
 
 class RolePage extends StatelessWidget {
   const RolePage({super.key});
@@ -37,7 +37,7 @@ class RolePage extends StatelessWidget {
           Positioned(
             top: 100,
             left: 55,
-            child: const BigText(text: 'Select role', size: 50),
+            child: const BrownBigText(text: 'Select role', size: 50),
           ),
           Center(
             child: Container(
@@ -64,7 +64,7 @@ class RolePage extends StatelessWidget {
                             color: AppColours.darkbrown,
                           ),
                           SizedBox(width: Demensions.width15 * 2.5),
-                          BigText(
+                          BrownBigText(
                             text: 'Customer',
                             size: Demensions.fontSize10 * 2.5,
                           ),
@@ -90,7 +90,7 @@ class RolePage extends StatelessWidget {
                             color: AppColours.darkbrown,
                           ),
                           SizedBox(width: Demensions.width15 * 2.5),
-                          BigText(
+                          BrownBigText(
                             text: 'Chef',
                             size: Demensions.fontSize10 * 2.5,
                           ),
@@ -117,7 +117,7 @@ class RolePage extends StatelessWidget {
                             color: AppColours.darkbrown,
                           ),
                           SizedBox(width: Demensions.width15 * 2.5),
-                          BigText(
+                          BrownBigText(
                             text: 'Driver',
                             size: Demensions.fontSize10 * 2.5,
                           ),

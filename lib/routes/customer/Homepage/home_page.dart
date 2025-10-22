@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:locabite/controller/splash_controller.dart';
+import 'package:locabite/core/utility/check_location.dart';
 import 'package:locabite/routes/customer/Homepage/main_food_page.dart';
 import 'package:locabite/routes/customer/account_page.dart';
 import 'package:locabite/routes/customer/cart_page.dart';
-import 'package:locabite/utility/app_colours.dart';
+import 'package:locabite/core/utility/app_colours.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -61,7 +60,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Get.find<SplashController>().checkLocation(context);
+    checkLocation(context);
     return PersistentTabView(
       context,
       controller: _controller,
