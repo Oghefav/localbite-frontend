@@ -40,20 +40,20 @@ class _HomePageState extends State<HomePage> {
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.home),
         title: ("Home"),
-        activeColorPrimary: AppColours.darkbrown,
-        inactiveColorPrimary: AppColours.lightBrown,
+        activeColorPrimary: AppColours.black,
+        inactiveColorPrimary: Colors.grey.shade400,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.cart),
         title: ("Cart"),
-        activeColorPrimary: AppColours.darkbrown,
-        inactiveColorPrimary: AppColours.lightBrown,
+        activeColorPrimary: AppColours.black,
+        inactiveColorPrimary: Colors.grey.shade400,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.person),
         title: ("Account"),
-        activeColorPrimary: AppColours.darkbrown,
-        inactiveColorPrimary: AppColours.lightBrown,
+        activeColorPrimary: AppColours.black,
+        inactiveColorPrimary: Colors.grey.shade400,
       ),
     ];
   }
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
       hideNavigationBarWhenKeyboardAppears: true,
       popBehaviorOnSelectedNavBarItemPress: PopBehavior.all,
       padding: const EdgeInsets.only(top: 8),
-      backgroundColor: AppColours.cream,
+      backgroundColor: AppColours.white,
       isVisible: true,
       animationSettings: const NavBarAnimationSettings(
         navBarItemAnimation: ItemAnimationSettings(

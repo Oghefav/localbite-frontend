@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:locabite/core/utility/check_location.dart';
 import 'package:locabite/routes/chef/chef_main_page.dart';
 import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/routes/chef/chef_profile_page.dart';
+import 'package:locabite/routes/chef/Transaction_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent_bottom_nav_bar.dart';
 
 class ChefHomePage extends StatefulWidget {
@@ -26,8 +28,8 @@ class _ChefHomePageState extends State<ChefHomePage> {
   List<Widget> _buildScreens() {
     return [
       ChefMainPage(),
-      Container(child: Center(child: Text('ik;ljf;akj'))),
-      Container(child: Center(child: Text('ik;ljf;akj'))),
+      TransactionPage(),
+      ChefProfilePage(),
     ];
   }
 

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:locabite/routes.dart';
 import 'package:locabite/routes/customer/Homepage/main_food_body_page.dart';
 import 'package:locabite/core/utility/app_colours.dart';
 import 'package:locabite/core/utility/big_text.dart';
@@ -12,7 +14,7 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColours.cream,
+      backgroundColor: AppColours.white,
       body: Column(
         children: [
           SizedBox(height: Demensions.height15 * 3),
@@ -22,13 +24,13 @@ class CartPage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back),
+                SizedBox(width: Demensions.width80),
                 BigText(text: 'Cart'),
-                AppIcon(icon: Icons.delete),
+                AppIcon(icon: Icons.delete, iconColor: AppColours.black),
               ],
             ),
           ),
-          SizedBox(height: Demensions.height15,),
+          SizedBox(height: Demensions.height15),
           Expanded(
             child: MediaQuery.removePadding(
               context: context,
@@ -49,6 +51,13 @@ class CartPage extends StatelessWidget {
                     height: 130,
                     width: double.maxFinite,
                     decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          offset: Offset(0, 3),
+                          blurRadius: 4,
+                        ),
+                      ],
                       color: AppColours.white,
                       borderRadius: BorderRadius.circular(
                         Demensions.radius10 * 2,
@@ -59,7 +68,7 @@ class CartPage extends StatelessWidget {
                         Container(
                           height: 100,
                           width: 100,
-              
+
                           decoration: BoxDecoration(
                             color: Colors.black12,
                             shape: BoxShape.circle,
@@ -81,11 +90,12 @@ class CartPage extends StatelessWidget {
                               SizedBox(height: Demensions.height15),
                               SmallText(
                                 text:
-                                    'dslk;fakjfsdkjfajfdashfjdhlajAHLSJLHJAshjaj',
+                                    'ogbono soup is a very tasting and delicious meal to be served',
                               ),
                               SizedBox(height: Demensions.height15),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   BigText(
                                     text:
@@ -100,7 +110,7 @@ class CartPage extends StatelessWidget {
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                            color: AppColours.darkbrown,
+                                            color: AppColours.black,
                                             borderRadius: BorderRadius.circular(
                                               Demensions.radius10 / 2,
                                             ),
@@ -110,10 +120,13 @@ class CartPage extends StatelessWidget {
                                             color: AppColours.white,
                                           ),
                                         ),
-                                        BigText(text: '20'),
+                                        BigText(
+                                          text: '20',
+                                          size: Demensions.fontSize10 * 2,
+                                        ),
                                         Container(
                                           decoration: BoxDecoration(
-                                            color: AppColours.darkbrown,
+                                            color: AppColours.black,
                                             borderRadius: BorderRadius.circular(
                                               Demensions.radius10 / 2,
                                             ),
@@ -139,11 +152,13 @@ class CartPage extends StatelessWidget {
             ),
           ),
           Container(
-            
             padding: EdgeInsets.symmetric(horizontal: Demensions.width15),
             decoration: BoxDecoration(
               color: AppColours.white,
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(Demensions.width10 * 1), topRight: Radius.circular(Demensions.width10 * 1),)
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(Demensions.width10 * 1),
+                topRight: Radius.circular(Demensions.width10 * 1),
+              ),
             ),
             child: Stack(
               children: [
@@ -159,15 +174,13 @@ class CartPage extends StatelessWidget {
                           BigText(
                             text:
                                 '${MainFoodBody.currency(context).currencySymbol} 2000',
+                            size: Demensions.fontSize10 * 2,
                           ),
                         ],
                       ),
-                      SizedBox(height: 15,),
-                      Divider(
-                        height: 4,
-                        color: AppColours.darkbrown,
-                      ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 15),
+                      Divider(height: 4, color: AppColours.white),
+                      SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -175,41 +188,56 @@ class CartPage extends StatelessWidget {
                           BigText(
                             text:
                                 '${MainFoodBody.currency(context).currencySymbol} 400',
+                            size: Demensions.fontSize10 * 2,
                           ),
                         ],
                       ),
-                      SizedBox(height: 15,),
-                      Divider(
-                        height: 4,
-                        color: AppColours.darkbrown,
-                      ),
-                      SizedBox(height: 15,),
+                      SizedBox(height: 15),
+                      Divider(height: 4, color: AppColours.white),
+                      SizedBox(height: 15),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const BigText(text: 'Total',),
+                          BigText(
+                            text: 'Total',
+                            size: Demensions.fontSize10 * 2,
+                          ),
                           BigText(
                             text:
                                 '${MainFoodBody.currency(context).currencySymbol} 2400',
+                            size: Demensions.fontSize10 * 2,
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
                 Positioned(
                   bottom: Demensions.height10,
-                  right: Demensions.width15 * 1.5 ,
+                  right: Demensions.width15 * 1.5,
                   left: Demensions.width15 * 1.5,
-                  child: Container(
-                    height: 40,
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: AppColours.darkbrown,
-                      borderRadius: BorderRadius.circular(Demensions.radius15 * 2)
+                  child: GestureDetector(
+                    onTap: () => Get.toNamed(AppRoute.locationSelectionPage),
+
+                    child: Container(
+                      height: 40,
+                      width: 300,
+                      decoration: BoxDecoration(
+                        color: AppColours.blue.shade500,
+                        borderRadius: BorderRadius.circular(
+                          Demensions.radius15 * 2,
+                        ),
+                      ),
+                      child: Center(
+                        child: BigText(
+                          text:
+                              'Checkout - ${MainFoodBody.currency(context).currencySymbol} 2400',
+                          color: AppColours.white,
+                        ),
+                      ),
                     ),
-                    child: Center(child: BigText(text: 'Checkout - ${MainFoodBody.currency(context).currencySymbol} 2400', color: AppColours.white,)),
-                  ))
+                  ),
+                ),
               ],
             ),
           ),

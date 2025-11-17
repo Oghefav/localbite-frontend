@@ -111,7 +111,7 @@ class LoginPage extends StatelessWidget {
 
                           if ((controller.emailError == null &&
                               controller.passwordError == null)) {
-                            Get.toNamed(AppRoute.getChefHomePage());
+                            Get.toNamed(AppRoute.driverDashboardPage);
                           } else {
                             print('not correct');
                           }

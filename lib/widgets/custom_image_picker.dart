@@ -6,22 +6,27 @@ import 'package:locabite/core/utility/demensions.dart';
 import 'package:locabite/core/utility/small_text.dart';
 import 'package:locabite/widgets/select_image_bottom_sheet.dart';
 
+// ignore: must_be_immutable
 class CustomImagePicker extends StatelessWidget {
-  const CustomImagePicker({super.key});
+  String? mealImage;
+  CustomImagePicker({super.key, this.mealImage});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MealManagementController>(
       builder: (controller) {
         return GestureDetector(
-          onTap: () => selectImageBottomSheet(context, controller),
+          onTap: () {
+            controller.changeImage(mealImage);
+            selectImageBottomSheet(context, controller);
+          },
           child:
-              controller.getImage == null
+              controller.getImage == null && mealImage == null
                   ? DottedBorder(
                     options: RoundedRectDottedBorderOptions(
                       radius: Radius.circular(Demensions.radius15),
                       color: Colors.grey,
-                      dashPattern: const [6, 3],          
+                      dashPattern: const [6, 3],
                     ),
                     child: Container(
                       height: Demensions.height100,
@@ -50,12 +55,21 @@ class CustomImagePicker extends StatelessWidget {
                         height: Demensions.height100,
                         width: Demensions.width100,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 * 4),
-                          child: Image.file(
-                            controller.getImage!,
-                            height: Demensions.height100,
-                            fit: BoxFit.cover,
+                          borderRadius: BorderRadius.circular(
+                            Demensions.radius15 * 4,
                           ),
+                          child:
+                              controller.getImage == null
+                                  ? Image(
+                                    image: AssetImage(mealImage!),
+                                    height: Demensions.height100,
+                                    fit: BoxFit.cover,
+                                  )
+                                  : Image.file(
+                                    controller.getImage!,
+                                    height: Demensions.height100,
+                                    fit: BoxFit.cover,
+                                  ),
                         ),
                       ),
                       SmallText(text: 'Tap to edit meal image'),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:locabite/controller/meal_management_controller.dart';
+import 'package:locabite/core/theme/input_theme.dart';
 import 'package:locabite/core/utility/big_text.dart';
 import 'package:locabite/core/utility/demensions.dart';
 import 'package:locabite/core/utility/app_colours.dart';
@@ -11,7 +12,8 @@ class AddMealPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
+    final _addMealFormKey = GlobalKey<FormState>();
+    final controller = Get.put(MealManagementController());
     return Scaffold(
       appBar: AppBar(title: BigText(text: 'Add meal'), centerTitle: true),
       body: SingleChildScrollView(
@@ -20,128 +22,85 @@ class AddMealPage extends StatelessWidget {
             return Padding(
               padding: EdgeInsets.symmetric(horizontal: Demensions.width15),
               child: Form(
-                key: _formKey,
+                key: _addMealFormKey,
                 child: Column(
                   children: [
                     SizedBox(height: Demensions.height15 * 2),
                     CustomImagePicker(),
                     SizedBox(height: Demensions.height15 * 2),
                     TextFormField(
-                      validator: (value) => value!.isEmpty ? 'Meal name is required' : null,
+                      validator:
+                          (value) =>
+                              value!.isEmpty ? 'Meal name is required' : null,
                       controller: controller.mealNameController,
-                      decoration: InputDecoration(
-                        hintText: 'e.g Ogbono Soup',
+                      decoration: customInputDecoration(
+                        hintText: 'e.g Ogbono soup',
                         labelText: 'Meal Name',
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 ),
-                          borderSide: BorderSide(
-                            color: AppColours.black,
-                            style: BorderStyle.solid,
-                            width: 2,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 ),
-                          borderSide: BorderSide(
-                            color: AppColours.black,
-                            style: BorderStyle.solid,
-                            width: 2,
-                          ),
-                        ),
                       ),
                     ),
                     SizedBox(height: Demensions.height15),
                     TextFormField(
                       maxLines: 5,
                       controller: controller.descriptionController,
-                      decoration: InputDecoration(
+                      validator:
+                          (value) =>
+                              value!.isEmpty
+                                  ? 'Meal description is required'
+                                  : null,
+                      decoration: customInputDecoration(
                         hintText: 'Enter a short description of the meal',
                         labelText: 'Description',
                         alignLabelWithHint: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 ),
-                          borderSide: BorderSide(
-                            color: AppColours.black,
-                            style: BorderStyle.solid,
-                            width: 2,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 ),
-                          borderSide: BorderSide(
-                            color: AppColours.black,
-                            style: BorderStyle.solid,
-                            width: 2,
-                          ),
-                        ),
                       ),
                     ),
                     SizedBox(height: Demensions.height15),
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       controller: controller.priceController,
-                      decoration: InputDecoration(
+                      validator:
+                          (value) =>
+                              value!.isEmpty ? 'Meal price is required' : null,
+                      decoration: customInputDecoration(
                         hintText: '2000',
                         prefixText: '₦',
                         labelText: 'Price(₦)',
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 ),
-                          borderSide: BorderSide(
-                            color: AppColours.black,
-                            style: BorderStyle.solid,
-                            width: 2,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 ),
-                          borderSide: BorderSide(
-                            color: AppColours.black,
-                            style: BorderStyle.solid,
-                            width: 2,
-                          ),
-                        ),
                       ),
                     ),
-                     SizedBox(height: Demensions.height15),
+                    SizedBox(height: Demensions.height15),
                     TextFormField(
-                      // validator: 
+                      validator:
+                          (value) =>
+                              value!.isEmpty ? 'Meal units is required' : null,
                       keyboardType: TextInputType.number,
                       controller: controller.unitsController,
-                      decoration: InputDecoration(
+                      decoration: customInputDecoration(
                         hintText: 'eg 1,2, 3',
                         labelText: 'Units',
-                        
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 ),
-                          borderSide: BorderSide(
-                            color: AppColours.black,
-                            style: BorderStyle.solid,
-                            width: 2,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(Demensions.radius15 ),
-                          borderSide: BorderSide(
-                            color: AppColours.black,
-                            style: BorderStyle.solid,
-                            width: 2,
-                          ),
-                        ),
                       ),
                     ),
-                     SizedBox(height: Demensions.height15 * 4),
-                    
-                    Container(
-                      height: 50,
-                      width: 250,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(Demensions.radius15),
-                        color: AppColours.blue.shade200,
-                      ),
-                      child: Center(
-                        child: BigText(text: 'Add', color: AppColours.cream),
-                      ),
-                    ),
+                    SizedBox(height: Demensions.height15 * 4),
 
+                    GestureDetector(
+                      onTap: () {
+                        _addMealFormKey.currentState!.validate();
+                        if (controller.pickedImage == null) {
+                          Get.snackbar('Error', 'Meal image is reqired');
+                        }
+                      },
+                      child: Container(
+                        height: 50,
+                        width: 250,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(
+                            Demensions.radius15 * 2,
+                          ),
+                          color: AppColours.blue.shade500,
+                        ),
+                        child: Center(
+                          child: BigText(text: 'Add', color: AppColours.cream),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

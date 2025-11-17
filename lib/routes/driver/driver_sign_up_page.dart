@@ -338,20 +338,23 @@ class DriverSignUpPage extends StatelessWidget {
                               print('not correct');
                             }
                           },
-                          child: Container(
-                            height: Demensions.height100 / 2,
-                            width: Demensions.width100 * 3,
-                            decoration: BoxDecoration(
-                              color: AppColours.darkbrown,
-                              borderRadius: BorderRadius.circular(
-                                Demensions.radius10,
+                          child: GestureDetector(
+                            onTap: () => Get.toNamed(AppRoute.accountSetupPage),
+                            child: Container(
+                              height: Demensions.height100 / 2,
+                              width: Demensions.width100 * 3,
+                              decoration: BoxDecoration(
+                                color: AppColours.darkbrown,
+                                borderRadius: BorderRadius.circular(
+                                  Demensions.radius10,
+                                ),
                               ),
-                            ),
-                            child: Center(
-                              child: BrownBigText(
-                                text: 'Sign up',
-                                color: AppColours.white,
-                                size: Demensions.fontSize10 * 2,
+                              child: Center(
+                                child: BrownBigText(
+                                  text: 'Sign up',
+                                  color: AppColours.white,
+                                  size: Demensions.fontSize10 * 2,
+                                ),
                               ),
                             ),
                           ),

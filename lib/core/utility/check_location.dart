@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:locabite/core/utility/big_text.dart';
 
 Future<void> checkLocation(BuildContext context) async {
@@ -32,3 +33,16 @@ Future<void> checkLocation(BuildContext context) async {
       );
     }
   }
+
+Future<LatLng> getCurrentLocation() async {
+  bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+  if (!serviceEnabled) {
+    await Geolocator.openLocationSettings();
+  }
+
+  LocationPermission permission = await Geolocator.requestPermission();
+
+  Position position = await Geolocator.getCurrentPosition();
+  return LatLng(position.latitude, position.longitude);
+}
+

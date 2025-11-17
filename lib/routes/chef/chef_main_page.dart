@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:locabite/data/models/payment_model.dart';
+import 'package:locabite/data/repositories/meals.dart';
+import 'package:locabite/routes.dart';
 import 'package:locabite/routes/customer/Homepage/main_food_body_page.dart';
-import 'package:locabite/sample%20code/ui_samplecode.dart';
 import 'package:locabite/core/utility/app_colours.dart';
 import 'package:locabite/core/utility/big_text.dart';
 import 'package:locabite/core/utility/demensions.dart';
 import 'package:locabite/core/utility/small_text.dart';
+import 'package:locabite/data/models/order.dart';
 
 class ChefMainPage extends StatelessWidget {
   const ChefMainPage({super.key});
@@ -12,10 +17,11 @@ class ChefMainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Order> recentOrders = [
-      Order("87092348278275724", "Ogbono Soup", "35 mins ago", "preparing"),
-      Order("80273452974235444", "Jollof Rice & Chicken", "58 mins ago", "preparing"),
-      Order("78702348972387428", "Pounded Yam & Egusi", "2 hours ago", "completed"),
-      Order("78702348972387428", "Beans and Plantain", "2 hours ago", "completed"),
+     jollofRiceOrder,
+        mixedMealOrder,
+        soupOrder,
+        breakfastOrder,
+        partyOrder,
     ];
     return Scaffold(
       body: SingleChildScrollView(
@@ -23,16 +29,16 @@ class ChefMainPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: Demensions.height35),
-        
+
             _buildWelcomeSection(welcomeText: 'Hi Oghene, welcome back 👨‍🍳'),
             SizedBox(height: Demensions.height15 * 1.5),
-        
+
             _buildStatCardSection(context: context),
             SizedBox(height: Demensions.height15 * 1.5),
-        
+
             _buildQuickAction(),
             SizedBox(height: Demensions.height15 * 1.5),
-        
+
             _buildRecentOrderSection(
               context: context,
               recentOrders: recentOrders,
@@ -129,7 +135,9 @@ class ChefMainPage extends StatelessWidget {
     return Row(
       children: [
         SizedBox(width: Demensions.height15),
-        Expanded(child: _quickAction(icon: Icons.add_circle, text: 'Add meal')),
+        Expanded(
+          child: _quickAction(icon: Icons.add_circle, text: 'Manage meals'),
+        ),
         SizedBox(width: Demensions.height15),
         Expanded(
           child: _quickAction(icon: Icons.view_list, text: 'View Orders'),
@@ -141,7 +149,11 @@ class ChefMainPage extends StatelessWidget {
 
   Widget _quickAction({required IconData icon, required String text}) {
     return ElevatedButton.icon(
-      onPressed: () {},
+      onPressed: () {
+        if (text == 'Manage meals') {
+          Get.toNamed(AppRoute.mealManagementPage);
+        }
+      },
       label: Text(text),
       icon: Icon(icon),
       style: ElevatedButton.styleFrom(
@@ -199,53 +211,134 @@ class ChefMainPage extends StatelessWidget {
   }
 
   Widget _buildOrderItems(Order order) {
-    Color statusColor = Colors.blue;
-    IconData statusIcon = Icons.schedule;
+  Color statusColor = Colors.blue;
+  IconData statusIcon = Icons.schedule;
 
-    if (order.status.toLowerCase() == 'completed') {
-      statusColor = Colors.green;
-      statusIcon = Icons.check_circle;
-    }
-    return  Container(
-      decoration: BoxDecoration(
-        border: Border( top: BorderSide(width: 1, color: Colors.grey.shade200))
-      ),
-      padding: EdgeInsets.symmetric(horizontal: Demensions.width15, vertical: Demensions.height15),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: EdgeInsets.all(Demensions.width15 / 2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Demensions.radius10),
-                color: statusColor.withValues(alpha: 0.1),
-              ),
-              child: Icon(statusIcon, color: statusColor, size: Demensions.iconSize20/ 1.4,),
-            ),
-            Column(
-              children: [
-                BigText(text: order.mealName, size: Demensions.fontSize10 * 1.3 ,),
-                Row(
-                  children: [Icon(Icons.schedule, size: Demensions.iconSize24 / 2, color: Colors.grey,),
-                  SizedBox(width: Demensions.width10 / 2,),
-                   SmallText(text: order.time)],
-                ),
-              ],
-            ),
-            Container(
-              padding: EdgeInsets.all(Demensions.radius15 /2),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(Demensions.radius15),
-                color: statusColor.withValues(alpha: 0.1)
-              ),
-              child: Text(
-                order.status.toUpperCase(),
-                style: TextStyle(color: statusColor, fontSize: Demensions.fontSize10),
-              ),
-            ),
-          ],
-        ),
-      );
-    
+  if (order.orderStatus!.toLowerCase() == 'completed') {
+    statusColor = Colors.green;
+    statusIcon = Icons.check_circle;
+  } else if (order.orderStatus!.toLowerCase() == 'cancelled') {
+    statusColor = Colors.red;
+    statusIcon = Icons.cancel;
   }
+
+  // Get first 2 items for display
+  final displayedItems = order.items.length > 2 
+      ? order.items.sublist(0, 2) 
+      : order.items;
+
+  return Container(
+    decoration: BoxDecoration(
+      border: Border(top: BorderSide(width: 1, color: Colors.grey.shade200)),
+    ),
+    padding: EdgeInsets.symmetric(
+      horizontal: Demensions.width15,
+      vertical: Demensions.height15,
+    ),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Status Icon
+        Container(
+          padding: EdgeInsets.all(Demensions.width15 / 2),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Demensions.radius10),
+            color: statusColor.withValues(alpha: 0.1),
+          ),
+          child: Icon(
+            statusIcon,
+            color: statusColor,
+            size: Demensions.iconSize20 / 1.4,
+          ),
+        ),
+        SizedBox(width: Demensions.width10),
+
+        // Order Details
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Order ID and Total
+              Row(
+                children: [
+                  Expanded(
+                    child: BigText(
+                      text: 'Order Id: ${order.orderId}',
+                      size: Demensions.fontSize10,
+                    ),
+                  ),
+                  SmallText(
+                    text: '₦${order.total.toStringAsFixed(0)}',
+                    color: AppColours.green,
+                    // fontWeight: FontWeight.bold,
+                  ),
+                ],
+              ),
+              SizedBox(height: Demensions.height5),
+
+              // Items Summary
+              SmallText(
+                text: _getItemsSummary(order.items),
+                color: Colors.grey[600],
+              ),
+              SizedBox(height: Demensions.height5),
+
+              // Time and Item Count
+              Row(
+                children: [
+                  Icon(
+                    Icons.schedule,
+                    size: Demensions.iconSize24 / 2,
+                    color: Colors.grey,
+                  ),
+                  SizedBox(width: Demensions.width10 / 2),
+                  // SmallText(text: order.time ?? '35 mins ago'),
+                  SmallText(text: '35 mins ago'),
+                  Spacer(),
+                  SmallText(
+                    text: '${order.items.length} items',
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        SizedBox(width: Demensions.width10),
+
+        // Status Badge
+        Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: Demensions.width10,
+            vertical: Demensions.height5,
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(Demensions.radius15),
+            color: statusColor.withValues(alpha: 0.1),
+          ),
+          child: Text(
+            order.orderStatus!.toUpperCase(),
+            style: TextStyle(
+              color: statusColor,
+              fontSize: Demensions.fontSize10 * 0.9,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
+
+String _getItemsSummary(List<OrderItem> items) {
+  if (items.isEmpty) return 'No items';
+  
+  if (items.length == 1) {
+    return '${items[0].name} x${items[0].quantity}';
+  }
+  
+  final firstItem = items[0];
+  final remainingCount = items.length - 1;
+  
+  return '${firstItem.name} x${firstItem.quantity} + $remainingCount more items';
+}}

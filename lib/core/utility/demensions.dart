@@ -10,6 +10,8 @@ class Demensions {
   static double get width80 => screenHeight / 10.075;
   static double get width100 => screenHeight / 8.06;
   static double get width220 => screenHeight / 3.66;
+  static double get width180 => screenHeight / 4.48;
+  
   // fontsize
  static double get fontSize10 => screenHeight / 80.6;
 
@@ -25,6 +27,8 @@ class Demensions {
   static double get height10 => screenHeight / 80.6;
   static double get height100 => screenHeight / 8.06;
   static double get height60 => screenHeight / 13.43;
+  static double get height32 => screenHeight / 25.18;
+  static double get height130 => screenHeight / 6.2;
 
   //radius
   static double get radius15 => screenHeight / 53.73;

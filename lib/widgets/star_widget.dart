@@ -20,9 +20,9 @@ class StarWidget extends StatelessWidget {
         Wrap(
           children: List.generate(maxRating, (int index) {
             if (index < rating) {
-              return Icon(Icons.star, color: AppColours.darkbrown);
+              return Icon(Icons.star, color: AppColours.black);
             } else {
-              return Icon(Icons.star_border, color: AppColours.darkbrown);
+              return Icon(Icons.star_border, color: AppColours.black);
             }
           }),
         ),

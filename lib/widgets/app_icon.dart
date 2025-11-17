@@ -25,7 +25,7 @@ class AppIcon extends StatelessWidget {
         color: backGroundColour,
         borderRadius: BorderRadius.circular(size /2),
       ),
-      child: Icon(icon, size: iconSize, color: iconColor),
+      child: Center(child: Icon(icon, size: iconSize, color: iconColor)),
     );
   }
 }

@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:locabite/routes/customer/Homepage/main_food_body_page.dart';
+import 'package:get/get.dart';
+import 'package:locabite/data/models/meal.dart';
 import 'package:locabite/core/utility/app_colours.dart';
+import 'package:locabite/routes.dart';
 import 'package:locabite/widgets/app_icon.dart';
 import 'package:locabite/core/utility/big_text.dart';
 import 'package:locabite/core/utility/demensions.dart';
 import 'package:locabite/core/utility/small_text.dart';
-import 'package:locabite/widgets/comment_widget.dart';
+import 'package:locabite/widgets/reviews_widget.dart';
 
-class MealDetail extends StatelessWidget {
-  const MealDetail({super.key});
+class MealDetailPage extends StatelessWidget {
+  final Meal meal = Get.arguments;
+ MealDetailPage({super.key,});
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
-      backgroundColor: AppColours.cream,
       body: Column(
         children: [
           SizedBox(height: Demensions.height35 * 1.3),
@@ -25,8 +28,8 @@ class MealDetail extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AppIcon(icon: Icons.arrow_back),
-                Container(
+              IconButton(onPressed: () => Get.back(),icon: Icon(Icons.arrow_back_ios,),),
+                SizedBox(
                   child: Row(
                     children: [
                       Container(
@@ -43,37 +46,39 @@ class MealDetail extends StatelessWidget {
                       SizedBox(width: Demensions.width15),
                       AppIcon(icon: Icons.favorite_border),
                       SizedBox(width: Demensions.width15),
-                      Container(
-                        // color: Colors.amber,
+                      SizedBox(
                         height: Demensions.height10 * 4,
                         width: Demensions.width80 / 2,
-                        child: Stack(
-                          children: [
-                            Positioned(
-                              bottom: Demensions.height10 / 5,
-                              child: AppIcon(
-                                icon: Icons.shopping_cart_outlined,
-                              ),
-                            ),
-                            Positioned(
-                              top: Demensions.width10 / 5,
-                              right: Demensions.width10 / 5,
-                              child: Container(
-                                height: Demensions.height10 * 2,
-                                width: Demensions.width10 * 2,
-                                decoration: BoxDecoration(
-                                  color: AppColours.darkbrown,
-                                  shape: BoxShape.circle,
+                        child: GestureDetector(
+                          onTap: () => Get.toNamed(AppRoute.cartPage),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                bottom: Demensions.height10 / 5,
+                                child: AppIcon(
+                                  icon: Icons.shopping_cart_outlined,
                                 ),
-                                child: Center(
-                                  child: BigText(
-                                    text: '20',
-                                    color: AppColours.white,
+                              ),
+                              Positioned(
+                                top: Demensions.width10 / 5,
+                                right: Demensions.width10 / 5,
+                                child: Container(
+                                  height: Demensions.height10 * 2,
+                                  width: Demensions.width10 * 2,
+                                  decoration: BoxDecoration(
+                                    color: AppColours.green,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                       '2',
+                                      style: TextStyle(color: AppColours.white),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -89,7 +94,7 @@ class MealDetail extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage('assets/images/food3.jfif'),
+                image: AssetImage(meal.image!),
                 fit: BoxFit.cover,
               ),
             ),
@@ -103,19 +108,21 @@ class MealDetail extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BigText(text: "Ogbono Soup", size:   Demensions.fontSize10 * 3),
+                BigText(text: meal.title!, size: Demensions.fontSize10 * 3),
                 SmallText(
-                  text: 'By adslk;fajfalskjfkjdsakj',
+                  text: 'By ${meal.chef}',
                   size: Demensions.fontSize10,
                 ),
                 Row(
                   children: [
-                    BigText(text: '34 reviews'),
-                    SizedBox(width: Demensions.width80 * 1.8),
-                    BigText(text: 'view all'),
-                    SizedBox(width: Demensions.width15),
-                    AppIcon(icon: Icons.arrow_forward_ios_rounded),
-                  ],
+                    BigText(text: '34 reviews', size: Demensions.fontSize10 * 2,),
+                    SizedBox(width: Demensions.width80 * 2.2),
+                        GestureDetector(
+                          onTap: () => Get.toNamed(AppRoute.allReviewsPage),
+                          child: Text('View all', style: TextStyle(color: Colors.blue.shade500),)),
+                    
+                  
+                  ]
                 ),
               ],
             ),
@@ -129,15 +136,7 @@ class MealDetail extends StatelessWidget {
               child: Align(
                 child: Stack(
                   children: [
-                    ListView.builder(
-                      padding: EdgeInsets.only(
-                        bottom: Demensions.height100 / 1.2,
-                      ),
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        return CommentWidget();
-                      },
-                    ),
+                    ReviewsWidget(),
                     Positioned(
                       left: Demensions.width10,
                       bottom: Demensions.height10 * 4,
@@ -145,9 +144,9 @@ class MealDetail extends StatelessWidget {
                       child: Container(
                         height: Demensions.height100 / 2,
                         decoration: BoxDecoration(
-                          color: AppColours.cream,
+                          color: AppColours.white,
                           border: Border.all(
-                            color: AppColours.darkbrown,
+                            color: AppColours.blue.shade500,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(
@@ -157,21 +156,21 @@ class MealDetail extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Icon(Icons.remove, color: AppColours.darkbrown),
+                            Icon(Icons.remove, color: AppColours.black),
                             BigText(text: '1'),
-                            Icon(Icons.add, color: AppColours.darkbrown),
+                            Icon(Icons.add, color: AppColours.black),
                           ],
                         ),
                       ),
                     ),
                     Positioned(
                       right: Demensions.width15,
-                      bottom: Demensions.height10 * 40 ,
+                      bottom: Demensions.height10 * 4,
                       child: Container(
                         height: Demensions.height100 / 2,
                         width: Demensions.width220,
                         decoration: BoxDecoration(
-                          color: AppColours.darkbrown,
+                          color: AppColours.blue.shade500,
                           borderRadius: BorderRadius.circular(
                             Demensions.radius15 * 2,
                           ),
@@ -179,8 +178,9 @@ class MealDetail extends StatelessWidget {
                         child: Center(
                           child: BigText(
                             text:
-                                'Add to cart - ${MainFoodBody.currency(context).currencySymbol}11',
-                            color: AppColours.lightBrown,
+                                'Add to cart - 11',
+                            color: AppColours.white,
+                            // size: Demensions.fontSize10,
                           ),
                         ),
                       ),
